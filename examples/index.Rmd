@@ -1,88 +1,36 @@
----
-hitheme     : googlecode
-author      : Michael W. Kearney
-school      : School of Journalism<br>Informatics Institute
-university  : University of Missouri
-title       : DSCA 8000:<br>Slide presentation template
----
+## Examples of goodslides
 
-## rtweet pkg
+### Mizzou theme
 
+- Live demo [can be seen here](mizzou/mizzou-theme)
 
-```r
-## stream
-rt <- stream_tweets(timeout = 30, verbose = FALSE)
-## plot
-mutate(rt, eng = ifelse(lang == "en" & !is.na(lang),
-                        "English", "Non-English")) %>%
-  group_by(eng) %>%
-  ts_data("5 secs") %>%
-  group_by(eng) %>%
-  trimts(1, 1) %>%
-  ggplot(aes(x = time, y = n)) +
-  geom_smooth(method = "loess", aes(group = eng), colour = "#aa00cc", alpha = .3) +
-  geom_point(aes(fill = eng), shape = 21, size = 3.5, alpha = .7) +
-  labs(title = "Filtering Twitter's stream API using stop words",
-       subtitle = "Tweets collected and aggregated in 10 second
-	   intervals in R using rtweet") +
-  ggthemes::theme_fivethirtyeight(base_size = 18) +
-  theme(legend.title = element_blank()) +
-  scale_color_manual(values = c("#5577fa", "#df6666")) +
-  scale_fill_manual(values = c("#5577fa", "#df6666"))
+```{r, eval=FALSE}
+## mizzou theme
+theme_mizzou()
+## render slides
+goodslides("mizzou-theme.Rmd")
 ```
 
----
+### Kansas theme
 
-## R code example
+- Live demo [can be seen here](kansas/kansas-theme)
 
-
-```r
-10 + 10
+```{r, eval=FALSE}
+## kansas theme
+theme_kansas()
+goodslides("kansas-theme.Rmd")
 ```
 
+### Custom theme
+
+- Live demo [can be seen here](custom/custom-theme)
+
+```{r, eval=FALSE}
+## custom theme
+goodslides.theme(
+  color1 = "#609",
+  color2 = "yellowgreen", 
+  stroke = FALSE
+)
+goodslides("custom-theme.Rmd")
 ```
-## [1] 20
-```
-
-```r
-foo <- function(n) {
-  data.frame(
-    var1 = rnorm(n),
-	var2 = rnorm(n)
-  )
-}
-df <- foo(10)
-print(df)
-```
-
-```
-##        var1      var2
-## 1   0.43225 -0.150125
-## 2   1.40051  0.287400
-## 3   0.21360 -0.816828
-## 4   2.09123  0.225610
-## 5   0.56325  1.161580
-## 6   0.53642 -1.284858
-## 7   0.36809  0.258306
-## 8   0.24627  0.099335
-## 9  -0.25374 -0.510551
-## 10  1.09260  0.784540
-```
-
---- .transition
-
-## Diversity
-
----
-
-## Diversity
-** Exposure to diversity higher than ever**
-- Travel
-- Technology
-- Trade
-- Television
-
---- .transition
-
-## That's all!
-

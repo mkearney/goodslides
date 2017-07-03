@@ -205,6 +205,6 @@ update_stroke <- function(css, stroke = FALSE) {
   if (stroke) {
     css
   } else {
-    gsub("-webkit-text-stroke: 1px color2;", "", css)
+    gsub("-webkit-text-stroke: 1px color4;", "", css)
   }
 }
