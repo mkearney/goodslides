@@ -1,79 +1,90 @@
-## slideR
-R package for making minimalist, elegant html slides.
+## goodslides
+R package for making good slides
 
 ## Install
 
+Download from Github to install.
 
 ```r
 if (!"devtools" %in% installed.packages()) {
   install.packages("devtools")
 }
-devtools::install_github("mkearney/slideR")
+devtools::install_github("mkearney/goodslides")
 ```
 
-## Use
+## Examples
 
-Convert markdown (.md) and Rmarkdown (.Rmd) files using the `slideR`
-function. An [example of a compatible markdown file can be found here](docs/index).
-
+Use `goodslides` function to convert markdown (.md) or Rmarkdown
+(.Rmd) files into good slides---great for presentations. Easily
+customizable. An example of a compatible markdown file can be found in
+[examples](examples).
 
 ```r
-library(slideR)
-slideR("example.md")
+## load goodslides
+library(goodslides)
+
+## render markdown to html
+goodslides("example.md")
+
+## open html presentation slides
 browseURL("example.html")
 ```
 
-If the current working directory doesn't already have a frameworks
-directory, the `slideR` function will download the front-end libraries
-for you. Just make sure the markdown file is located in your working
-directory or else the styles and formatting will break.
+By default `goodslides` will download relevant front-end libraries for
+you. Just make sure the markdown file is located in your working
+directory---which is where the frontend 'frameworks' files will be
+placed. Otherwise, the slides will not be good.
 
-## Style and formatting
+## Themes
 
-### Default theme
-
-Over time I'll work on making this more oriented toward general use,
-but for now the default theme is Mizzou---specifically their School of
-Journalism and Data Science and Analytics program, both of which I'll
-be joining this Fall.
-
-### Custom themes
-
-It's possible to customize style features of the slides, including colors,
-fonts, and background images (logos) using the `slideR.theme`
-function.
-
+Users still have lots of room to customize beyond the intial default
+template, which simply includes a couple of bright colors. To modify
+the style and format of the slides, use the `goodslides.theme`
+function. For the most part, themes are limited to different pairs of
+colors, but users may also experiment with logos and banners (logo1 =
+topright, logo2 = topleft, logo3 = transition banner) and lighter
+(stroke = TRUE) and darker (stroke = FALSE) variants.
 
 ```r
-slideR.theme(
-  color1 = "yellowgreen",
-  color2 = "mediumpurple4",
+## set theme
+goodslides.theme(
+  color1 = "maroon",
+  color2 = "white",
   logo1 = NULL,
-  logo2 = NULL
-)
-slideR("example.md")
-```
-
-
-#### Kansas theme
-
-To create a University of Kansas inspired theme, download the logo and
-enter the following customizations.
-
-
-```r
-dir.create("images")
-download.file(
-  "https://dl.dropboxusercontent.com/u/94363099/logo.png",
-  "images/logo.png"
-)
-slideR.theme(
-  color1 = "#0051ba",
-  color2 = "#fff",
-  logo1 = "logo.png",
   logo2 = NULL,
   stroke = FALSE
 )
-slideR("example")
+
+## render slides
+goodslides("example.md")
+```
+
+### Mizzou theme
+
+Over time I'll hopefully add more themes but for now there are only
+two premade ones--University of Missouri and University of Kansas. The
+Mizzou theme currently assumes the presenter has some interest or
+affiliation with the School of Journalism and Data Science and
+Analytics program.
+
+```{r}
+## set theme
+theme_mizzou()
+
+## render slides
+goodslides("example.md")
+```
+
+#### Kansas theme
+
+The University of Kansas theme, on the other hand, is not specific to
+any college or school.
+
+```r
+## set theme
+theme_kansas()
+
+## render slides
+goodslides("example.md")
 ```
 
