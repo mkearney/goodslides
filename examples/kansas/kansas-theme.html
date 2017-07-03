@@ -9,7 +9,7 @@
 	
 	<!-- LOAD STYLE SHEETS -->
 	<link rel="stylesheet" href="./frameworks/html5slides/default/styles.css">
-	<link rel="stylesheet" href="./highlighters/highlight.js/css/github.css" />  <link rel="stylesheet" href = "./widgets/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="./highlighters/highlight.js/css/tomorrow.css" />  <link rel="stylesheet" href = "./widgets/bootstrap/css/bootstrap.css">
   
 </head>
 <body style='display: none'>
@@ -32,15 +32,26 @@ University of Missouri</p>
 <article class="" id="slide-2" style="background:;">
   <h3>rtweet pkg</h3>
   <ul>
+<li>Load packages</li>
+</ul>
+
+<pre><code class="r">## load rtweet dplyr and ggplot2
+library(rtweet)
+library(dplyr)
+library(ggplot2)
+</code></pre>
+
+<ul>
 <li>Stream tweets with R tweet package</li>
 </ul>
 
-<pre><code class="r">## load rtweet &amp; dplyr
-library(rtweet)
-library(dplyr)
-
-## stream
+<pre><code class="r">## stream
 rt &lt;- stream_tweets(timeout = 30, verbose = FALSE)
+## group by english and non-english
+rt$eng &lt;- ifelse(
+    rt$lang == &quot;en&quot; &amp; !is.na(rt$lang), &quot;English&quot;, &quot;Non-English&quot;
+  )
+rt &lt;- group_by(rt, eng)
 </code></pre>
 
 </article>
@@ -51,12 +62,7 @@ rt &lt;- stream_tweets(timeout = 30, verbose = FALSE)
 <li><code>ts_data</code> and <code>trimts</code> are useful rtweet functions</li>
 </ul>
 
-<pre><code class="r">## plot
-mutate(rt, eng = ifelse(lang == &quot;en&quot; &amp; !is.na(lang),
-                        &quot;English&quot;, &quot;Non-English&quot;)) %&gt;%
-  group_by(eng) %&gt;%
-  ts_data(&quot;5 secs&quot;) %&gt;%
-  group_by(eng) %&gt;%
+<pre><code class="r">ts_data(rt, &quot;5 secs&quot;) %&gt;%
   trimts(1, 1) %&gt;%
   ggplot(aes(x = time, y = n)) +
   geom_smooth(method = &quot;loess&quot;, aes(group = eng), colour = &quot;#aa00cc&quot;, alpha = .3) +
@@ -69,6 +75,10 @@ mutate(rt, eng = ifelse(lang == &quot;en&quot; &amp; !is.na(lang),
   scale_color_manual(values = c(&quot;#5577fa&quot;, &quot;#df6666&quot;)) +
   scale_fill_manual(values = c(&quot;#5577fa&quot;, &quot;#df6666&quot;))
 </code></pre>
+
+<ul>
+<li>The plot looks nice, I promise.</li>
+</ul>
 
 </article>
 
@@ -88,17 +98,17 @@ df &lt;- foo(10)
 print(df)
 </code></pre>
 
-<pre><code>##          var1        var2
-## 1   0.1291041 -0.09347291
-## 2  -0.8703954  1.27398143
-## 3   0.1050261  0.01447321
-## 4  -0.7169485  0.13847922
-## 5   1.5695167  0.73504448
-## 6   1.0588849  0.24186480
-## 7   0.5436685 -0.95741596
-## 8  -1.8899637 -0.23678884
-## 9  -1.4360019 -0.19551798
-## 10 -1.9686494 -1.06455213
+<pre><code>##          var1       var2
+## 1   1.2550940 -2.1614949
+## 2   0.8774562  0.9635271
+## 3   1.6292473 -0.8959539
+## 4   0.6926544 -0.6766164
+## 5   1.5077352  1.9477026
+## 6  -0.2652300  0.8850373
+## 7   1.0913394  1.6788624
+## 8  -0.1731676  0.1782695
+## 9  -0.5003689 -1.3293232
+## 10 -0.0732295 -1.1541722
 </code></pre>
 
 </article>

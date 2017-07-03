@@ -1,5 +1,5 @@
 ---
-hitheme     : github
+hitheme     : tomorrow
 author      : Michael W. Kearney
 school      : School of Journalism<br>Informatics Institute
 university  : University of Missouri
@@ -8,15 +8,26 @@ title       : goodslides: Kansas theme
 
 ## rtweet pkg
 
+- Load packages
+
+```{r, eval=FALSE}
+## load rtweet dplyr and ggplot2
+library(rtweet)
+library(dplyr)
+library(ggplot2)
+```
+
+
 - Stream tweets with R tweet package
 
 ```{r, eval=FALSE}
-## load rtweet & dplyr
-library(rtweet)
-library(dplyr)
-
 ## stream
 rt <- stream_tweets(timeout = 30, verbose = FALSE)
+## group by english and non-english
+rt$eng <- ifelse(
+    rt$lang == "en" & !is.na(rt$lang), "English", "Non-English"
+  )
+rt <- group_by(rt, eng)
 ```
 
 ---
@@ -26,12 +37,7 @@ rt <- stream_tweets(timeout = 30, verbose = FALSE)
 - `ts_data` and `trimts` are useful rtweet functions
 
 ```{r, eval=FALSE}
-## plot
-mutate(rt, eng = ifelse(lang == "en" & !is.na(lang),
-                        "English", "Non-English")) %>%
-  group_by(eng) %>%
-  ts_data("5 secs") %>%
-  group_by(eng) %>%
+ts_data(rt, "5 secs") %>%
   trimts(1, 1) %>%
   ggplot(aes(x = time, y = n)) +
   geom_smooth(method = "loess", aes(group = eng), colour = "#aa00cc", alpha = .3) +
@@ -44,6 +50,9 @@ mutate(rt, eng = ifelse(lang == "en" & !is.na(lang),
   scale_color_manual(values = c("#5577fa", "#df6666")) +
   scale_fill_manual(values = c("#5577fa", "#df6666"))
 ```
+
+- The plot looks nice, I promise.
+
 
 ---
 
