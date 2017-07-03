@@ -14,10 +14,9 @@ devtools::install_github("mkearney/goodslides")
 
 ## Examples
 
-Use `goodslides` function to convert markdown (.md) or Rmarkdown
-(.Rmd) files into good slides---great for presentations. Easily
-customizable. An example of a compatible markdown file can be found in
-[examples](examples).
+Use the `goodslides()` function to convert markdown (.md) or Rmarkdown
+(.Rmd) files into good slides. An example of a compatible markdown
+file and its accompanied output can be found in [examples](examples).
 
 ```r
 ## load goodslides
@@ -30,7 +29,7 @@ goodslides("example.md")
 browseURL("example.html")
 ```
 
-By default `goodslides` will download relevant front-end libraries for
+By default `goodslides()` will download relevant front-end libraries for
 you. Just make sure the markdown file is located in your working
 directory---which is where the frontend 'frameworks' files will be
 placed. Otherwise, the slides will not be good.
@@ -39,9 +38,9 @@ placed. Otherwise, the slides will not be good.
 
 Users still have lots of room to customize beyond the intial default
 template, which simply includes a couple of bright colors. To modify
-the style and format of the slides, use the `goodslides.theme`
-function. For the most part, themes are limited to different pairs of
-colors, but users may also experiment with logos and banners (logo1 =
+the style and format of the slides, use the `goodslides.theme()`
+function. For the most part, themes are limited to various color
+pairs, but users may also experiment with logos and banners (logo1 =
 topright, logo2 = topleft, logo3 = transition banner) and lighter
 (stroke = TRUE) and darker (stroke = FALSE) variants.
 
@@ -54,7 +53,6 @@ goodslides.theme(
   logo2 = NULL,
   stroke = FALSE
 )
-
 ## render slides
 goodslides("example.md")
 ```
@@ -75,7 +73,7 @@ theme_mizzou()
 goodslides("example.md")
 ```
 
-#### Kansas theme
+### Kansas theme
 
 The University of Kansas theme, on the other hand, is not specific to
 any college or school.
@@ -88,3 +86,8 @@ theme_kansas()
 goodslides("example.md")
 ```
 
+To modify and execute the example, you can also just clone this repository:
+
+```bash
+git clone https://github.com/mkearney/goodslides.git
+```
