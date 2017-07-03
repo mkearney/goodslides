@@ -7,7 +7,7 @@
 goodslides.theme(base_size = NULL, base_weight = NULL, base_family = NULL,
   base_color = NULL, code_family = NULL, heading_family = NULL,
   heading_weight = NULL, color1 = NULL, color2 = NULL, color3 = NULL,
-  logo1 = NULL, logo2 = NULL, logo3 = NULL, stroke = TRUE)
+  logo1 = NULL, logo2 = NULL, logo3 = NULL, stroke = TRUE, new = TRUE)
 }
 \arguments{
 \item{base_size}{Size of base font. Defaults to 28.}

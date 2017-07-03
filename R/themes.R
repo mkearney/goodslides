@@ -32,14 +32,24 @@ goodslides.theme <- function(base_size = NULL,
                              logo1 = NULL,
                              logo2 = NULL,
                              logo3 = NULL,
-                             stroke = TRUE) {
-  unlink(".cache", recursive = TRUE)
-  if (!dir.exists("frameworks") & !file.exists(file.path("..", "goodslides"))) {
+                             stroke = TRUE,
+                             new = TRUE) {
+  if (new) {
+    unlink("frameworks", recursive = TRUE)
+  }
+  if (!dir.exists("frameworks") &
+      !file.exists(file.path("..", "goodslides", "DESCRIPTION"))) {
     unzip(
-      system.file("data/goodslides-archive.zip", package = "goodslides")
+      system.file("data/goodslides-archive.zip",
+                  package = "goodslides"),
+      junkpaths = FALSE,
+      exdir = "."
     )
-    sh <- file.copy(list.files("goodslides-archive", full.names = TRUE),
-                    ".", recursive = TRUE)
+    file.copy(
+      list.files("goodslides-archive", full.names = TRUE),
+      ".",
+      recursive = TRUE
+    )
     unlink("goodslides-archive", recursive = TRUE)
     unlink("__MACOSX", recursive = TRUE)
   }
@@ -70,11 +80,12 @@ goodslides.theme <- function(base_size = NULL,
 
 #' theme_kansas
 #'
-#' @param f Name of markdown file
-#' @return Saves Kansas-themed html presentation.
+#' A university of kansas inspired theme.
+#'
+#' @return Sets Kansas-themed html presentation.
 #' @export
 #' @noRd
-theme_kansas <- function(f) {
+theme_kansas <- function() {
   goodslides.theme(
     color1 = "#0051ba",
     color2 = "#fff",
@@ -85,11 +96,12 @@ theme_kansas <- function(f) {
 
 #' theme_mizzou
 #'
-#' @param f Name of markdown file
-#' @return Saves Mizzou-themed html presentation.
+#' A university of missouri inspired theme.
+#'
+#' @return Sets Mizzou-themed html presentation.
 #' @export
 #' @noRd
-theme_mizzou <- function(f) {
+theme_mizzou <- function() {
   goodslides.theme(
     color1 = "#f1b82d",
     color2 = "#000",
@@ -101,7 +113,7 @@ theme_mizzou <- function(f) {
 }
 
 
-update_code_family <- function(css, family) {
+update_code_family <- function(css, family = NULL) {
   if (is.null(family)) family <- "Inconsolata"
   gsub("code_family", family, css)
 }
@@ -195,9 +207,4 @@ update_stroke <- function(css, stroke = FALSE) {
   } else {
     gsub("-webkit-text-stroke: 1px color2;", "", css)
   }
-}
-
-googlefonts <- function() {
-  fonts <- "Anton,Arimo,Athiti,Bitter,Dosis,Droid Serif,Fjalla One,Hind,Inconsolata,Indie Flower,Muli,Noto Sans,Noto Serif,Oxygen,PT Sans Narrow,PT Serif,Playfair Display,Poppins,Rationale,Titillium Web"
-  strsplit(fonts, ",")[[1]]
 }

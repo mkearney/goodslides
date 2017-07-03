@@ -10,16 +10,8 @@
 #' @importFrom slidify knit2slides
 goodslides <- function(f, ...) {
   stopifnot(grepl("\\.md$|\\.Rmd$", f))
-  if (!dir.exists("frameworks") & !file.exists(file.path("..", "goodslides"))) {
-    unzip(
-      system.file("data/goodslides-archive.zip", package = "goodslides")
-    )
-    sh <- file.copy(list.files("goodslides-archive", full.names = TRUE),
-                    ".", recursive = TRUE)
-    unlink("goodslides-archive", recursive = TRUE)
-    unlink("__MACOSX", recursive = TRUE)
-  }
-  goodslides.theme(...)
+  ## theme
+  goodslides.theme(new = FALSE, ...)
   ## read lines of provided file name
   con <- file(f)
   x <- readLines(con, warn = FALSE)
@@ -40,7 +32,7 @@ goodslides <- function(f, ...) {
     file = tmp,
     fill = TRUE)
   ## build
-  suppressMessages(slidify::knit2slides(tmp))
+  suppressMessages(slidify::knit2slides(tmp, getOption("encoding")))
   ## rename
   oldhtml <- gsub("\\.Rmd", ".html", tmp)
   newhtml <- gsub("\\.Rmd", ".html", f)
