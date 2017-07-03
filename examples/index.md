@@ -1,4 +1,7 @@
-<br><br>
+---
+title: "goodslides examples"
+output: github_document
+---
 
 ## Examples of goodslides
 

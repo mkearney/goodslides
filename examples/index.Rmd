@@ -1,4 +1,7 @@
-<br><br>
+---
+title: "goodslides examples"
+output: github_document
+---
 
 ## Examples of goodslides
 
@@ -6,7 +9,7 @@
 
 - Live demo [can be seen here](mizzou/mizzou-theme)
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, include=TRUE}
 ## mizzou theme
 theme_mizzou()
 ## render slides
@@ -17,7 +20,7 @@ goodslides("mizzou-theme.Rmd")
 
 - Live demo [can be seen here](kansas/kansas-theme)
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, include=TRUE}
 ## kansas theme
 theme_kansas()
 goodslides("kansas-theme.Rmd")
@@ -27,7 +30,7 @@ goodslides("kansas-theme.Rmd")
 
 - Live demo [can be seen here](custom/custom-theme)
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, include=TRUE}
 ## custom theme
 goodslides.theme(
   color1 = "#609",

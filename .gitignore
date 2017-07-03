@@ -6,3 +6,4 @@ README.Rmd
 .cache
 examples/.cache
 ^.#*
+index.Rmd
