@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=head+family:400,heading_weight');
+@import url('https://fonts.googleapis.com/css?family=code+family');
+
+article.past, article.next {
+    background: #e0e0e0;
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+}
+.slides > article {
+    font-family: base_family, Hevletica, sans-serif;
+    color: base_color;
+    font-size: base_sizepx;
+}
+.slides > article.current {
+    background-image: url(images/logo1), url(images/logo2);
+    background-repeat: no-repeat, no-repeat;
+    background-position: 99.5% .5%, .5% 99.5%;
+}
+ul, ol {
+    margin-left: 5%;
+}
+li {
+    list-style: none;
+    color: base_color;
+    padding-top: 20px;
+    padding-bottom: 0;
+    line-height: 36px;
+}
+li:before {
+    content:"*";
+    font-size: 30px;
+    vertical-align: middle;
+    margin-left: -.75em;
+    margin-right: .75em;
+    margin-top: .2em;
+}
+ul > li > ul > li {
+    color: base_color;
+}
+body {
+    font-weight: base_weight;
+}
+h1, h2, h3, h4 {
+    letter-spacing: -.25px;
+    font-weight: heading_weight;
+    font-family: heading_family, sans-serif;
+}
+h3 {
+    color: color1;
+    -webkit-text-stroke: 1px color4;
+    font-size: 44px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+h1.mytitle {
+    color: color2;
+    -webkit-text-stroke: 1px color4;
+    vertical-align: middle;
+    line-height: 76px;
+    text-align: center;
+    font-size: 48px;
+}
+h1.mytransition {
+    text-align: center;
+    line-height: 1.5;
+    vertical-align: middle;
+    color: color2;
+    padding: 20% 0;
+}
+article.transition.current {
+    background-image: url(images/logo3); background-position: 50% 100%;
+    background-color: color3;
+}
+article.transition.current h1.mytransition {
+    -webkit-text-stroke: 1px color4;
+}
+p.titleinfo {
+    margin-top: 10%;
+    font-size: 32px;
+    color: color4;
+    line-height: 48px;
+    text-align: center;
+    letter-spacing: -.25px;
+}
+span.cite {
+    font-size: 20px;
+    color: #999;
+    letter-spacing: -1px;
+}
+code {
+    font-family: code_family, monospace;
+}
+pre {
+    font-family: code_family, monospace;
+}
+code.vala {
+    font-size: .9em;
+    font-family: code_family, monospace;
+    line-height: 22px;
+}

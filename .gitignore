@@ -1,0 +1,9 @@
+README.Rmd
+.Rproj.user
+.Rhistory
+.RData
+.DS_Store
+.cache
+examples/.cache
+examples/index.html
+^.#*

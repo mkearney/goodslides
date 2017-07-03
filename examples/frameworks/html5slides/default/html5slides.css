@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=head+family:400,600');
+@import url('https://fonts.googleapis.com/css?family=code+family');
+
+article.past, article.next {
+    background: #e0e0e0;
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+}
+.slides > article {
+    font-family: Helvetica Neue, Hevletica, sans-serif;
+    color: #111;
+    font-size: 28px;
+}
+.slides > article.current {
+    background-image: url(images/mizzou-journalism.png), url(images/mizzou-dsa.png);
+    background-repeat: no-repeat, no-repeat;
+    background-position: 99.5% .5%, .5% 99.5%;
+}
+ul, ol {
+    margin-left: 5%;
+}
+li {
+    list-style: none;
+    color: #111;
+    padding-top: 20px;
+    padding-bottom: 0;
+    line-height: 36px;
+}
+li:before {
+    content:"*";
+    font-size: 30px;
+    vertical-align: middle;
+    margin-left: -.75em;
+    margin-right: .75em;
+    margin-top: .2em;
+}
+ul > li > ul > li {
+    color: #111;
+}
+body {
+    font-weight: 400;
+}
+h1, h2, h3, h4 {
+    letter-spacing: -.25px;
+    font-weight: 600;
+    font-family: Montserrat, sans-serif;
+}
+h3 {
+    color: #f1b82d;
+    -webkit-text-stroke: 1px #000;
+    font-size: 44px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+h1.mytitle {
+    color: #f1b82d;
+    -webkit-text-stroke: 1px #000;
+    vertical-align: middle;
+    line-height: 76px;
+    text-align: center;
+    font-size: 48px;
+}
+h1.mytransition {
+    text-align: center;
+    line-height: 1.5;
+    vertical-align: middle;
+    color: #f1b82d;
+    padding: 20% 0;
+}
+article.transition.current {
+    background-image: url(images/mizzou-banner.png); background-position: 50% 100%;
+    background-color: #fff;
+}
+article.transition.current h1.mytransition {
+    -webkit-text-stroke: 1px #000;
+}
+p.titleinfo {
+    margin-top: 10%;
+    font-size: 32px;
+    color: #000;
+    line-height: 48px;
+    text-align: center;
+    letter-spacing: -.25px;
+}
+span.cite {
+    font-size: 20px;
+    color: #999;
+    letter-spacing: -1px;
+}
+code {
+    font-family: Inconsolata, monospace;
+}
+pre {
+    font-family: Inconsolata, monospace;
+}
+code.vala {
+    font-size: .9em;
+    font-family: Inconsolata, monospace;
+    line-height: 22px;
+}
