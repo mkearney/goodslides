@@ -5,5 +5,4 @@ README.Rmd
 .DS_Store
 .cache
 examples/.cache
-examples/index.html
 ^.#*
