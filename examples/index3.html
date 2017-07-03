@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Michael W. Kearney">
+  <title>DSCA 8000: Slide presentation template</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">DSCA 8000:<br>Slide presentation template</h1>
+  <p class="author">Michael W. Kearney</p>
+</section>
+
+<section id="rtweet-pkg" class="slide level2">
+<h2>rtweet pkg</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## stream
+rt &lt;-<span class="st"> </span><span class="kw">stream_tweets</span>(<span class="dt">timeout =</span> <span class="dv">30</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+## plot
+<span class="kw">mutate</span>(rt, <span class="dt">eng =</span> <span class="kw">ifelse</span>(lang <span class="op">==</span><span class="st"> &quot;en&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(lang),
+                        <span class="st">&quot;English&quot;</span>, <span class="st">&quot;Non-English&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(eng) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ts_data</span>(<span class="st">&quot;5 secs&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(eng) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">trimts</span>(<span class="dv">1</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> time, <span class="dt">y =</span> n)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="kw">aes</span>(<span class="dt">group =</span> eng), <span class="dt">colour =</span> <span class="st">&quot;#aa00cc&quot;</span>, <span class="dt">alpha =</span> .<span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> eng), <span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">size =</span> <span class="fl">3.5</span>, <span class="dt">alpha =</span> .<span class="dv">7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Filtering Twitter&#39;s stream API using stop words&quot;</span>,
+       <span class="dt">subtitle =</span> <span class="st">&quot;Tweets collected and aggregated in 10 second</span>
+<span class="st">       intervals in R using rtweet&quot;</span>) <span class="op">+</span>
+<span class="st">  </span>ggthemes<span class="op">::</span><span class="kw">theme_fivethirtyeight</span>(<span class="dt">base_size =</span> <span class="dv">18</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>()) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#5577fa&quot;</span>, <span class="st">&quot;#df6666&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#5577fa&quot;</span>, <span class="st">&quot;#df6666&quot;</span>))</code></pre></div>
+</section>
+<section id="r-code-example" class="slide level2">
+<h2>R code example</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">10</span></code></pre></div>
+<pre><code>## [1] 20</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foo &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
+  <span class="kw">data.frame</span>(
+    <span class="dt">var1 =</span> <span class="kw">rnorm</span>(n),
+    <span class="dt">var2 =</span> <span class="kw">rnorm</span>(n)
+  )
+}
+df &lt;-<span class="st"> </span><span class="kw">foo</span>(<span class="dv">10</span>)
+<span class="kw">print</span>(df)</code></pre></div>
+<pre><code>##        var1      var2
+## 1   0.43225 -0.150125
+## 2   1.40051  0.287400
+## 3   0.21360 -0.816828
+## 4   2.09123  0.225610
+## 5   0.56325  1.161580
+## 6   0.53642 -1.284858
+## 7   0.36809  0.258306
+## 8   0.24627  0.099335
+## 9  -0.25374 -0.510551
+## 10  1.09260  0.784540</code></pre>
+<p>--- .transition</p>
+</section>
+<section id="diversity" class="slide level2">
+<h2>Diversity</h2>
+</section>
+<section id="diversity-1" class="slide level2">
+<h2>Diversity</h2>
+<p>** Exposure to diversity higher than ever** - Travel - Technology - Trade - Television</p>
+<p>--- .transition</p>
+</section>
+<section id="thats-all" class="slide level2">
+<h2>That's all!</h2>
+</section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

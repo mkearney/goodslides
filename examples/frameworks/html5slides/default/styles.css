@@ -363,7 +363,6 @@ li::before {
 pre {
     font-size: 18px;
     line-height: 20px;
-    color: black;
     -webkit-border-radius:6px;
     -moz-border-radius:6px;
     border-radius:10px;

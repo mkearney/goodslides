@@ -11,7 +11,7 @@
 goodslides <- function(f, ...) {
   stopifnot(grepl("\\.md$|\\.Rmd$", f))
   ## theme
-  goodslides.theme(new = FALSE, ...)
+  goodslides.theme(new = FALSE, getOption("encoding"))
   ## read lines of provided file name
   con <- file(f)
   x <- readLines(con, warn = FALSE)
@@ -134,9 +134,10 @@ preamble <- function(...) {
 framework   : "html5slides"
 revealjs    : {theme: "Default", transition: cube}
 widgets     : [bootstrap]
-mode        : selfcontained
-url         : {lib: "."}
 hitheme     : ', hitheme, '
+url         : {lib: "."}
+mode        : selfcontained
+knit        : slidify::knit2slides
 --- .transition
 
 <h2></h2>

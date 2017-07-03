@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title></title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="generator" content="slidify" />
+	
+	<!-- LOAD STYLE SHEETS -->
+	<link rel="stylesheet" href="./frameworks/html5slides/default/styles.css">
+	<link rel="stylesheet" href="./highlighters/highlight.js/css/github.css" />  <link rel="stylesheet" href = "./widgets/bootstrap/css/bootstrap.css">
+  
+</head>
+<body style='display: none'>
+	<section class='slides layout-regular template-regular'>
+     <article class="transition" id="slide-1" style="background:;">
+  <h3></h3>
+  <p><link rel="stylesheet" href="./frameworks/html5slides/default/html5slides.css"></p>
+
+<p><br>
+<br></p>
+
+<h1 class="mytitle">"DSCA 8000: <br>Slide presentation template"</h1>
+
+<p class="titleinfo">"Michael W. Kearney"</p>
+
+</article>
+
+<article class="" id="slide-2" style="background:;">
+  <h3>rtweet pkg</h3>
+  <pre><code class="r">## stream
+rt &lt;- stream_tweets(timeout = 30, verbose = FALSE)
+## plot
+mutate(rt, eng = ifelse(lang == &quot;en&quot; &amp; !is.na(lang),
+                        &quot;English&quot;, &quot;Non-English&quot;)) %&gt;%
+  group_by(eng) %&gt;%
+  ts_data(&quot;5 secs&quot;) %&gt;%
+  group_by(eng) %&gt;%
+  trimts(1, 1) %&gt;%
+  ggplot(aes(x = time, y = n)) +
+  geom_smooth(method = &quot;loess&quot;, aes(group = eng), colour = &quot;#aa00cc&quot;, alpha = .3) +
+  geom_point(aes(fill = eng), shape = 21, size = 3.5, alpha = .7) +
+  labs(title = &quot;Filtering Twitter&#39;s stream API using stop words&quot;,
+       subtitle = &quot;Tweets collected and aggregated in 10 second
+       intervals in R using rtweet&quot;) +
+  ggthemes::theme_fivethirtyeight(base_size = 18) +
+  theme(legend.title = element_blank()) +
+  scale_color_manual(values = c(&quot;#5577fa&quot;, &quot;#df6666&quot;)) +
+  scale_fill_manual(values = c(&quot;#5577fa&quot;, &quot;#df6666&quot;))
+</code></pre>
+
+</article>
+
+<article class="" id="slide-3" style="background:;">
+  <h3>R code example</h3>
+  <pre><code class="r">10 + 10
+</code></pre>
+
+<pre><code>## [1] 20
+</code></pre>
+
+<pre><code class="r">foo &lt;- function(n) {
+  data.frame(
+    var1 = rnorm(n),
+    var2 = rnorm(n)
+  )
+}
+df &lt;- foo(10)
+print(df)
+</code></pre>
+
+<pre><code>##        var1      var2
+## 1   0.43225 -0.150125
+## 2   1.40051  0.287400
+## 3   0.21360 -0.816828
+## 4   2.09123  0.225610
+## 5   0.56325  1.161580
+## 6   0.53642 -1.284858
+## 7   0.36809  0.258306
+## 8   0.24627  0.099335
+## 9  -0.25374 -0.510551
+## 10  1.09260  0.784540
+</code></pre>
+
+</article>
+
+<article class="transition" id="slide-4" style="background:;">
+  <h3>&nbsp;</h3>
+  <h1 class="mytransition">Diversity</h1>
+
+</article>
+
+<article class="" id="slide-5" style="background:;">
+  <h3>Diversity</h3>
+  <p>** Exposure to diversity higher than ever**</p>
+
+<ul>
+<li>Travel</li>
+<li>Technology</li>
+<li>Trade</li>
+<li>Television</li>
+</ul>
+
+</article>
+
+<article class="transition" id="slide-6" style="background:;">
+  <h3>&nbsp;</h3>
+  <h1 class="mytransition">That's all!</h1>
+
+</article>
+
+  </section>
+</body>
+  <!-- LOAD JAVASCRIPTS  -->
+	<script src='./frameworks/html5slides/default/slides.js'></script>
+	<script>  
+	$(function (){ 
+	  $("#example").popover(); 
+	  $("[rel='tooltip']").tooltip(); 
+	});  
+	</script>  
+	<!-- LOAD HIGHLIGHTER JS FILES -->
+	<script src="./highlighters/highlight.js/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+	 
+	</html>
